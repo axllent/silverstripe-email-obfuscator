@@ -1,5 +1,5 @@
 {
-	"name": "axllent/email-obfuscator",
+	"name": "axllent/silverstripe-email-obfuscator",
 	"description": "Email obfuscator extension/decorator for SilverStripe 3",
 	"type": "silverstripe-module",
 	"homepage": "https://github.com/axllent/silverstripe-email-obfuscator",
