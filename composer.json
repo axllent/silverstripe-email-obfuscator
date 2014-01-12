@@ -1,0 +1,15 @@
+{
+	"name": "axllent/silverstripe-email-obfuscator",
+	"description": "Email obfuscator extension/decorator for SilverStripe 3",
+	"keywords": ["silverstripe", "email encoder", "obfuscator"],
+	"type": "silverstripe-module",
+	"homepage": "https://github.com/axllent/silverstripe-email-obfuscator",
+	"license": "The MIT License (MIT)",
+	"authors": [{
+		"name": "Ralph Slooten",
+		"homepage": "https://github.com/axllent"
+	}],
+	"require": {
+		"silverstripe/framework": ">=3.0.0"
+	}
+}
