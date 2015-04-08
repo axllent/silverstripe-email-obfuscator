@@ -16,5 +16,8 @@
 	},
 	"require": {
 		"silverstripe/framework": "3.*"
+	},
+	"extra": {
+		"installer-name": "email-obfuscator"
 	}
 }
