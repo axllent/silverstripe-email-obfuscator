@@ -75,8 +75,8 @@ class EmailObfuscatorRequestProcessor implements RequestFilter {
 		return $encodedString;
 	}
 
-	public function preRequest(\SS_HTTPRequest $request, \Session $session, \DataModel $model) {
-		
+	public function preRequest(SS_HTTPRequest $request, Session $session, DataModel $model) {
+
 	}
 
 }
