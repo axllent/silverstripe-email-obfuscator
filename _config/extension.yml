@@ -1,3 +1,5 @@
-ContentController:
-  extensions:
-    - EmailObfuscatorControllerExtension
+Injector:
+  RequestProcessor:
+    properties:
+      filters:
+        - '%$EmailObfuscatorRequestProcessor'
