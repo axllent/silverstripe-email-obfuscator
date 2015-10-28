@@ -14,7 +14,7 @@
  * Authors: Techno Joy development team (www.technojoy.co.nz)
  */
 
-class EmailObfuscatorRequestProcessor extends RequestProcessor {
+class EmailObfuscatorRequestProcessor implements RequestFilter {
 
 	/**
 	 * Filter executed AFTER a request
@@ -75,5 +75,8 @@ class EmailObfuscatorRequestProcessor extends RequestProcessor {
 		return $encodedString;
 	}
 
+	public function preRequest(\SS_HTTPRequest $request, \Session $session, \DataModel $model) {
+		
+	}
 
 }
