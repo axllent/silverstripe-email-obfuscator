@@ -3,7 +3,7 @@
  * SilverStripe Email Obfuscator
  * =============================
  *
- * Extension/decorator to automatically encode all email
+ * RequestProcessor filter to automatically encode all email
  * addresses (including mailto: links) in outputted HTML.
  * Switches between ASCII & hexadecimal encoding.
  *

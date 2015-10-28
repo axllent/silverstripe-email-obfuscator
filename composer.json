@@ -1,6 +1,6 @@
 {
 	"name": "axllent/silverstripe-email-obfuscator",
-	"description": "Email obfuscator extension/decorator for SilverStripe 3",
+	"description": "Email obfuscator for SilverStripe",
 	"type": "silverstripe-module",
 	"homepage": "https://github.com/axllent/silverstripe-email-obfuscator",
 	"keywords": ["silverstripe", "email-obfuscator", "email-encoder", "spam", "anti-spam", "spamprotection"],

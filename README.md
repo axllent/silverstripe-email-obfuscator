@@ -1,9 +1,10 @@
-Email obfuscator extension/decorator for SilverStripe 3
+Email obfuscator for SilverStripe
 ====
-Extension to automatically obfuscate all visible email addresses
-in all HTML output via the ContentController by replacing them
-with an encoded (switching between ASCII & hexadecimal) version.
+A RequestProcessor filter to automatically obfuscate all visible email
+addresses in all HTML output via the ContentController by replacing
+them with an encoded (switching between ASCII & hexadecimal) version.
 
+## Example
 ```
 me@site.com
 ```
@@ -16,7 +17,7 @@ becomes:
 * SilverStripe 3+
 
 ## Usage
-The extension/decorator automatically encodes any email address outputted
-through the ContentController provided it contains the default text/html header.
+The filter automatically encodes any email address outputted through the
+ContentController provided it contains the default text/html header.
 
 No configuration required.
