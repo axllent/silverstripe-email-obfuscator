@@ -15,6 +15,6 @@
 		"issues": "https://github.com/axllent/silverstripe-email-obfuscator/issues"
 	},
 	"require": {
-		"silverstripe/framework": "3.*"
+		"silverstripe/framework": "~4.*"
 	}
 }

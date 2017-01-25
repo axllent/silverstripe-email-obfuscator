@@ -14,7 +14,7 @@ becomes:
 ```
 
 ## Requirements
-* SilverStripe 3+
+* SilverStripe 4+
 
 ## Usage
 The filter automatically encodes any email address outputted through the

@@ -1,5 +1,8 @@
-Injector:
-  RequestProcessor:
+---
+Name: emailobfuscatorrequestprocessors
+---
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Control\RequestProcessor:
     properties:
       filters:
         - '%$EmailObfuscatorRequestProcessor'
