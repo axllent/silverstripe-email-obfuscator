@@ -16,6 +16,8 @@ becomes:
 ## Requirements
 * SilverStripe 4+
 
+SilverStripe 3 should check out the silverstripe3 branch
+
 ## Usage
 The filter automatically encodes any email address outputted through the
 ContentController provided it contains the default text/html header.
