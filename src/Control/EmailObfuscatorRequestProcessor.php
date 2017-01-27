@@ -14,7 +14,7 @@
  * Authors: Techno Joy development team (www.technojoy.co.nz)
  */
 
-// namespace EmailObfuscator;
+namespace Axllent\EmailObfuscator\Control;
 
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;

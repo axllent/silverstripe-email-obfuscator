@@ -2,6 +2,8 @@
 Name: emailobfuscatorrequestprocessors
 ---
 SilverStripe\Core\Injector\Injector:
+  EmailObfuscatorRequestProcessor:
+    class: Axllent\EmailObfuscator\Control\EmailObfuscatorRequestProcessor
   SilverStripe\Control\RequestProcessor:
     properties:
       filters:

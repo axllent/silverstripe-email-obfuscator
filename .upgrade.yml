@@ -1,0 +1,2 @@
+mappings:
+  EmailObfuscatorRequestProcessor: Axllent\EmailObfuscator\Control\EmailObfuscatorRequestProcessor
