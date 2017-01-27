@@ -18,6 +18,9 @@ becomes:
 
 SilverStripe 3 should check out the silverstripe3 branch
 
+## Installation
+`composer require axllent/silverstripe-email-obfuscator`
+
 ## Usage
 The filter automatically encodes any email address outputted through the
 ContentController provided it contains the default text/html header.
