@@ -46,7 +46,7 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
      */
     public function ObfuscateEmails($html)
     {
-        $reg = '/[:_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/i';
+        $reg = '/[:_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})/i';
         if (preg_match_all($reg, $html, $matches)) {
             $searchstring = $matches[0];
             for ($i=0; $i < count($searchstring); $i++) {
