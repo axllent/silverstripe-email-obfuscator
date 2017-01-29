@@ -1,4 +1,13 @@
 <?php
+
+namespace Axllent\EmailObfuscator\Control;
+
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Control\RequestFilter;
+use SilverStripe\Control\Session;
+use SilverStripe\ORM\DataModel;
+
 /**
  * SilverStripe Email Obfuscator
  * =============================
@@ -13,14 +22,6 @@
  * License: MIT-style license http://opensource.org/licenses/MIT
  * Authors: Techno Joy development team (www.technojoy.co.nz)
  */
-
-namespace Axllent\EmailObfuscator\Control;
-
-use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Control\HTTPResponse;
-use SilverStripe\Control\RequestFilter;
-use SilverStripe\Control\Session;
-use SilverStripe\ORM\DataModel;
 
 class EmailObfuscatorRequestProcessor implements RequestFilter
 {
