@@ -31,7 +31,7 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
      * Run output through ObfuscateEmails filter
      * encoding emails in the $response
      */
-    public function postRequest(HTTPRequest $request, HTTPResponse $response, DataModel $model)
+    public function postRequest(HTTPRequest $request, HTTPResponse $response)
     {
         if (preg_match('/text\/html/', $response->getHeader('Content-Type'))) {
             $response->setBody(
@@ -89,7 +89,7 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
         return $encodedString;
     }
 
-    public function preRequest(HTTPRequest $request, Session $session, DataModel $model)
+    public function preRequest(HTTPRequest $request)
     {
     }
 }
