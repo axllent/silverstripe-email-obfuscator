@@ -2,6 +2,10 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.0.2]
+
+- Support SilverStripe 4.0.0-beta1
+
 ## [2.0.1]
 
 - Add documentation
