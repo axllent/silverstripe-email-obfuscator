@@ -15,13 +15,11 @@
 		"issues": "https://github.com/axllent/silverstripe-email-obfuscator/issues"
 	},
 	"require": {
-		"silverstripe/framework": "^4.0@dev"
+		"silverstripe/framework": "^4.0"
 	},
     "autoload": {
         "psr-4": {
             "Axllent\\EmailObfuscator\\": "src/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
