@@ -1,7 +1,7 @@
 {
 	"name": "axllent/silverstripe-email-obfuscator",
 	"description": "Email obfuscator for SilverStripe",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"homepage": "https://github.com/axllent/silverstripe-email-obfuscator",
 	"keywords": ["silverstripe", "email-obfuscator", "email-encoder", "spam", "anti-spam", "spamprotection"],
 	"license": "The MIT License (MIT)",
