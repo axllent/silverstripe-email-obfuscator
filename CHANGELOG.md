@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.0.4]
+
+- Exclude `/(admin|dev)/` urls
+
+
 ## [2.0.3]
 
 - Switch to silverstripe-vendormodule
