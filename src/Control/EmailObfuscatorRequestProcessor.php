@@ -25,7 +25,6 @@ use SilverStripe\ORM\DataModel;
 
 class EmailObfuscatorRequestProcessor implements RequestFilter
 {
-
     /**
      * Filter executed AFTER a request
      * Run output through ObfuscateEmails filter
@@ -33,9 +32,11 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
      */
     public function postRequest(HTTPRequest $request, HTTPResponse $response)
     {
-        if (preg_match('/text\/html/', $response->getHeader('Content-Type'))) {
+        if (preg_match('/text\/html/', $response->getHeader('Content-Type')) &&
+            !preg_match('/^(admin|dev)\//', $request->getURL())
+        ) {
             $response->setBody(
-                $this->ObfuscateEmails($response->getBody())
+                $this->obfuscateEmails($response->getBody())
             );
         }
     }
@@ -45,7 +46,7 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
      * @param string
      * @return string
      */
-    public function ObfuscateEmails($html)
+    public function obfuscateEmails($html)
     {
         $reg = '/[:_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})/i';
         if (preg_match_all($reg, $html, $matches)) {
