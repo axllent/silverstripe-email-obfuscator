@@ -16,7 +16,6 @@
 
 class EmailObfuscatorRequestProcessor implements RequestFilter
 {
-
     /**
      * Filter executed AFTER a request
      * Run output through ObfuscateEmails filter
@@ -24,9 +23,12 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
      */
     public function postRequest(SS_HTTPRequest $request, SS_HTTPResponse $response, DataModel $model)
     {
-        if (preg_match('/text\/html/', $response->getHeader('Content-Type'))) {
+        $base = preg_quote(Director::baseURL(), '/');
+        if (preg_match('/text\/html/', $response->getHeader('Content-Type')) &&
+            !preg_match('/^' . $base . '(admin|dev)\//', $request->getVar('url'))
+        ) {
             $response->setBody(
-                $this->ObfuscateEmails($response->getBody())
+                $this->obfuscateEmails($response->getBody())
             );
         }
     }
@@ -36,7 +38,7 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
      * @param string
      * @return string
      */
-    public function ObfuscateEmails($html)
+    public function obfuscateEmails($html)
     {
         $reg = '/[:_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/i';
         if (preg_match_all($reg, $html, $matches)) {
