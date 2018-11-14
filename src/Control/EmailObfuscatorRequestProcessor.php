@@ -5,8 +5,6 @@ namespace Axllent\EmailObfuscator\Control;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\RequestFilter;
-use SilverStripe\Control\Session;
-use SilverStripe\ORM\DataModel;
 
 /**
  * SilverStripe Email Obfuscator
@@ -30,9 +28,10 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
      * Run output through ObfuscateEmails filter
      * encoding emails in the $response
      */
-    public function postRequest(HTTPRequest $request, HTTPResponse $response)
+    public function postRequest(HTTPRequest $request, HTTPResponse $response = null)
     {
-        if (preg_match('/text\/html/', $response->getHeader('Content-Type')) &&
+        if ($response &&
+            preg_match('/text\/html/', $response->getHeader('Content-Type')) &&
             !preg_match('/^(admin|dev)\//', $request->getURL())
         ) {
             $response->setBody(
@@ -51,7 +50,7 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
         $reg = '/[:_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})/i';
         if (preg_match_all($reg, $html, $matches)) {
             $searchstring = $matches[0];
-            for ($i=0; $i < count($searchstring); $i++) {
+            for ($i = 0; $i < count($searchstring); $i++) {
                 $html = preg_replace(
                     '/' . $searchstring[$i] . '/',
                     $this->encode($searchstring[$i]),
