@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.0.6]
+
+- Ignore null values (PHP 8.1 support)
+
+
 ## [2.0.5]
 
 - Workaround for when an unauthenticated flush fails to send a `HTTPResponse` to the `postRequest()`
