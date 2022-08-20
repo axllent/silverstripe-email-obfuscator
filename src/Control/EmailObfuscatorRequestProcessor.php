@@ -1,5 +1,4 @@
 <?php
-
 namespace Axllent\EmailObfuscator\Control;
 
 use SilverStripe\Control\HTTPRequest;
@@ -20,19 +19,23 @@ use SilverStripe\Control\RequestFilter;
  * License: MIT-style license http://opensource.org/licenses/MIT
  * Authors: Techno Joy development team (www.technojoy.co.nz)
  */
-
 class EmailObfuscatorRequestProcessor implements RequestFilter
 {
     /**
      * Filter executed AFTER a request
      * Run output through ObfuscateEmails filter
      * encoding emails in the $response
+     *
+     * @param HTTPRequest  $request  HTTP request
+     * @param HTTPResponse $response HTTP response
+     *
+     * @return HTTPResponse
      */
     public function postRequest(HTTPRequest $request, HTTPResponse $response = null)
     {
-        if ($response &&
-            preg_match('/text\/html/', $response->getHeader('Content-Type')) &&
-            !preg_match('/^(admin|dev)\//', $request->getURL())
+        if ($response
+            && preg_match('/text\/html/', $response->getHeader('Content-Type'))
+            && !preg_match('/^(admin|dev)\//', $request->getURL())
         ) {
             $response->setBody(
                 $this->obfuscateEmails($response->getBody())
@@ -40,15 +43,17 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
         }
     }
 
-    /*
+    /**
      * Obfuscate all matching emails
-     * @param string
+     *
+     * @param string $html HTML string
+     *
      * @return string
      */
     public function obfuscateEmails($html)
     {
         $reg = '/[:_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})/i';
-        if (preg_match_all($reg, $html, $matches)) {
+        if (!is_null($html) && preg_match_all($reg, $html, $matches)) {
             $searchstring = $matches[0];
             for ($i = 0; $i < count($searchstring); $i++) {
                 $html = preg_replace(
@@ -58,19 +63,21 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
                 );
             }
         }
+
         return $html;
     }
 
     /**
      * Obscure email address.
      *
-     * @param string The email address
+     * @param $originalString string The email address
+     *
      * @return string The encoded (ASCII & hexadecimal) email address
      */
     protected function encode($originalString)
     {
-        $encodedString = '';
-        $nowCodeString = '';
+        $encodedString  = '';
+        $nowCodeString  = '';
         $originalLength = strlen($originalString);
         for ($i = 0; $i < $originalLength; $i++) {
             $encodeMode = ($i % 2 == 0) ? 1 : 2; // Switch encoding odd/even
@@ -86,9 +93,17 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
             }
             $encodedString .= $nowCodeString;
         }
+
         return $encodedString;
     }
 
+    /**
+     * Prerequest
+     *
+     * @param HTTPRequest $request HTTP request
+     *
+     * @return void
+     */
     public function preRequest(HTTPRequest $request)
     {
     }
