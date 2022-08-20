@@ -1,4 +1,4 @@
-Email obfuscator for SilverStripe
+Email obfuscator for Silverstripe
 ====
 A RequestProcessor filter to automatically obfuscate all visible email
 addresses in all HTML output via the ContentController by replacing
