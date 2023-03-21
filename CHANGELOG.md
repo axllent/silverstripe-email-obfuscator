@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.1.0]
+
+- Switch to HTTPMiddleware instead of RequestFilter
+- Support for Silverstripe 5
+
+
 ## [2.0.6]
 
 - Ignore null values (PHP 8.1 support)
