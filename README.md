@@ -1,6 +1,6 @@
 Email obfuscator for Silverstripe
 ====
-A RequestProcessor filter to automatically obfuscate all visible email
+A HTTPMiddleware filter to automatically obfuscate all visible email
 addresses in all HTML output via the ContentController by replacing
 them with an encoded (switching between ASCII & hexadecimal) version.
 
@@ -14,7 +14,7 @@ becomes:
 ```
 
 ## Requirements
-* SilverStripe 4+
+* SilverStripe ^4 || ^5
 
 SilverStripe 3 should check out the silverstripe3 branch
 

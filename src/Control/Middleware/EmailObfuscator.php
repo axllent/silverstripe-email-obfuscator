@@ -1,15 +1,16 @@
 <?php
-namespace Axllent\EmailObfuscator\Control;
+
+namespace Axllent\EmailObfuscator\Control\Middleware;
 
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
-use SilverStripe\Control\RequestFilter;
+use SilverStripe\Control\Middleware\HTTPMiddleware;
 
 /**
  * SilverStripe Email Obfuscator
  * =============================
  *
- * RequestProcessor filter to automatically encode all email
+ * Middleware filter to automatically encode all email
  * addresses (including mailto: links) in outputted HTML.
  * Switches between ASCII & hexadecimal encoding.
  *
@@ -19,7 +20,7 @@ use SilverStripe\Control\RequestFilter;
  * License: MIT-style license http://opensource.org/licenses/MIT
  * Authors: Techno Joy development team (www.technojoy.co.nz)
  */
-class EmailObfuscatorRequestProcessor implements RequestFilter
+class EmailObfuscator implements HTTPMiddleware
 {
     /**
      * Filter executed AFTER a request
@@ -31,8 +32,10 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
      *
      * @return HTTPResponse
      */
-    public function postRequest(HTTPRequest $request, HTTPResponse $response = null)
+    public function process(HTTPRequest $request, callable $delegate)
     {
+        $response = $delegate($request);
+
         if ($response
             && preg_match('/text\/html/', $response->getHeader('Content-Type'))
             && !preg_match('/^(admin|dev)\//', $request->getURL())
@@ -41,6 +44,8 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
                 $this->obfuscateEmails($response->getBody())
             );
         }
+
+        return $response;
     }
 
     /**
@@ -55,7 +60,7 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
         $reg = '/[:_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})/i';
         if (!is_null($html) && preg_match_all($reg, $html, $matches)) {
             $searchstring = $matches[0];
-            for ($i = 0; $i < count($searchstring); $i++) {
+            for ($i = 0; $i < count($searchstring); ++$i) {
                 $html = preg_replace(
                     '/' . $searchstring[$i] . '/',
                     $this->encode($searchstring[$i]),
@@ -79,15 +84,20 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
         $encodedString  = '';
         $nowCodeString  = '';
         $originalLength = strlen($originalString);
-        for ($i = 0; $i < $originalLength; $i++) {
-            $encodeMode = ($i % 2 == 0) ? 1 : 2; // Switch encoding odd/even
+        for ($i = 0; $i < $originalLength; ++$i) {
+            $encodeMode = (0 == $i % 2) ? 1 : 2; // Switch encoding odd/even
+
             switch ($encodeMode) {
                 case 1: // Decimal code
                     $nowCodeString = '&#' . ord($originalString[$i]) . ';';
+
                     break;
+
                 case 2: // Hexadecimal code
                     $nowCodeString = '&#x' . dechex(ord($originalString[$i])) . ';';
+
                     break;
+
                 default:
                     return 'ERROR: wrong encoding mode.';
             }
@@ -95,16 +105,5 @@ class EmailObfuscatorRequestProcessor implements RequestFilter
         }
 
         return $encodedString;
-    }
-
-    /**
-     * Prerequest
-     *
-     * @param HTTPRequest $request HTTP request
-     *
-     * @return void
-     */
-    public function preRequest(HTTPRequest $request)
-    {
     }
 }

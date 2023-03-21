@@ -1,10 +1,12 @@
 ---
-Name: emailobfuscatorrequestprocessors
+Name: emailobfuscatormiddleware
+After:
+  - requestprocessors
 ---
 SilverStripe\Core\Injector\Injector:
-  EmailObfuscatorRequestProcessor:
-    class: Axllent\EmailObfuscator\Control\EmailObfuscatorRequestProcessor
-  SilverStripe\Control\RequestProcessor:
+  EmailObfuscatorMiddleware:
+    class: Axllent\EmailObfuscator\Control\Middleware\EmailObfuscator
+  SilverStripe\Control\Director:
     properties:
-      filters:
-        - '%$EmailObfuscatorRequestProcessor'
+      Middlewares:
+        EmailObfuscatorMiddleware: '%$EmailObfuscatorMiddleware'
