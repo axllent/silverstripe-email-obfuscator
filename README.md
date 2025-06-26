@@ -18,9 +18,9 @@ becomes:
 
 ## Requirements
 
--   SilverStripe ^4 || ^5 || ^6
+-   Silverstripe ^4 || ^5 || ^6
 
-SilverStripe 3 should check out the silverstripe3 branch
+Silverstripe 3 should check out the silverstripe3 branch
 
 ## Installation
 
